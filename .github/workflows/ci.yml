@@ -1,0 +1,28 @@
+name: NexusFlow CI
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup .NET 8
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Restore dependencies
+      run: dotnet restore NexusFlow.sln
+
+    - name: Build solution
+      run: dotnet build NexusFlow.sln --no-restore -c Release
+
+    - name: Run Unit Tests
+      run: dotnet test NexusFlow.sln --no-build -c Release --verbosity normal --collect:"XPlat Code Coverage"

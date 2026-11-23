@@ -1,0 +1,25 @@
+## Build and Test Artifacts
+[Bb]in/
+[Oo]bj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vscode/
+.idea/
+
+## Database and Local Data
+*.db
+*.db-shm
+*.db-wal
+appsettings.Development.json
+
+## Logs
+logs/
+*.log
+
+## OS Generated
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store

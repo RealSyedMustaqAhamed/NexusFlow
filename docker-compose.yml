@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  nexusflow-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nexusflow-api
+    ports:
+      - "5000:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ConnectionStrings__DefaultConnection=Data Source=/app/data/nexusflow.db
+      - JwtSettings__Secret=NexusFlow_Super_Secure_Secret_Key_For_Jwt_Generation_2026!
+      - JwtSettings__Issuer=NexusFlow
+      - JwtSettings__Audience=NexusFlowClients
+    volumes:
+      - nexusflow-data:/app/data
+    restart: unless-stopped
+
+volumes:
+  nexusflow-data:
